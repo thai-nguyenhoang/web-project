@@ -5446,15 +5446,6 @@ isotope animations
   max-width: 150px;
 }
 
-.sf-menu{
-  margin-right:-1000px;
-}
-
-.sf-menu > li{
-  display: inline-block;
-  min-width: 200px;
-}
-
 .grey_section .list-chapters{
   margin: 3px 0 50px 0;
   border: 2px solid #blue;
