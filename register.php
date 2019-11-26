@@ -26,15 +26,15 @@
             <div class="modal-header">
                  <h4 class="modal-title" id="loginModalLabel">Manga<span class="highlight">Rock</span> Đăng nhập</h4>
             </div>
-            <form role="form" method="post" action="/">
+            <form role="form" method="post" action="register.php">
                 <div class="modal-body">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Địa chỉ email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Địa chỉ email">
+                         <div class="form-group">
+                            <label for="exampleInputEmail1">Tên đăng nhập</label>
+                            <input type="text" size="20" class="" name="username" value="<?php echo $username; ?>">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mật khẩu</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mật khẩu">
+                            <input type="password" name="password" >
                         </div>
                         <div class="checkbox">
                             <label>
@@ -43,9 +43,10 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="theme_button"><i class="rt-icon-ok"></i> Đăng nhập</button>
-                    <a href="#" class="theme_button" data-dismiss="modal"><i class="rt-icon-times"></i> Thoát</a>
-                </div>            
+                    <button type="submit" name="log_user" class="theme_button"><i class="rt-icon-ok"></i> Đăng nhập</button>
+                    <a href="#" class="theme_button" data-dismiss="modal"><i class="rt-icon-times"></i> Cancel</a>
+                </div>   
+                <?php include("error.php"); ?>                
             </form>
         </div>
     </div>
@@ -204,7 +205,7 @@
                             <abbr class="required" title="required">*</abbr>
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="username" value="<?php echo $username; ?>">
+                            <input type="text" size="20" class="" name="username" value="<?php echo $username; ?>">
                         </div>
                     </div>
                     <div class="clear"></div>
@@ -232,6 +233,7 @@
                              <input type="password" name="password_2">
                         </div>
                     </div>
+                     <?php include("error.php"); ?>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
                             <button type="submit" class="theme_button" name="reg_user"><i class="rt-icon-user2"></i> Đăng ký</button>
@@ -241,7 +243,9 @@
 
 
             </div>
-            
+           
+                
+            </div>
 
 
         </div>

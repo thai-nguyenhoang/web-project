@@ -28,11 +28,11 @@
                 <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên đăng nhập</label>
-                            <input type="text" class="form-control" name="username" value="<?php echo $username; ?>">
+                            <input type="text" size="20" class="" name="username" value="<?php echo $username; ?>">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mật khẩu</label>
-                            <input type="password" name="password_1" >
+                            <input type="password" name="password" >
                         </div>
                         <div class="checkbox">
                             <label>
@@ -41,9 +41,10 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="theme_button"><i class="rt-icon-ok"></i> Đăng nhập</button>
+                    <button type="submit" name="log_user" class="theme_button"><i class="rt-icon-ok"></i> Đăng nhập</button>
                     <a href="#" class="theme_button" data-dismiss="modal"><i class="rt-icon-times"></i> Cancel</a>
-                </div>            
+                </div> 
+                <?php include("error.php"); ?>           
             </form>
         </div>
     </div>
