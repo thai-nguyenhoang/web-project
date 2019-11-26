@@ -1,4 +1,4 @@
-<?php include('connect.php') ?>
+<?php include('connect.php'); ?>
 <!DOCTYPE html>
 <head>
     <title>Title</title>
@@ -17,6 +17,7 @@
 </head>
 <body>
 
+
 <div id="box_wrapper">
 
     <section id="topline" class="grey_section">
@@ -32,7 +33,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <span>
-                        <i class="rt-icon-user2"></i> <a href="login.php" >Đăng nhập</a>
+                        <i class="rt-icon-user2"></i> <a href="login.php">Đăng nhập</a>
                     </span>
                     <span>
                         <i class="rt-icon-locked"></i> <a href="register.php">Đăng ký</a>
@@ -44,29 +45,11 @@
     </section>
 
 
-    <section id="mainslider" class="dark_section">
-        <div class="slider-wrapper">
-            <div class="responisve-container">
-                <div class="slider">
-                    <div class="fs_loader"></div>
-                    <div class="slide">
-                        <img data-in="fade" data-out="fade" src="img/wallpaper/wallpaper1.jpg" width="1920" height="550">
-                    </div>
-
-                    <div class="slide" data-in="slideLeft">
-                        <img data-in="fade" data-out="fade" src="img/wallpaper/wallpaper2.jpg" width="1920" height="550">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
     <section id="topinfo" class="action_section table_section light_section">
         <div class="container">
             <div class="row">
                 <div class="col-sm-4">
-                    <a href="index.php" class="navbar-brand">MANGA<span>Rock</span></a>
+                    <a href="index.php" class="navbar-brand"> MANGA<span>ROCK</span></a>
                 </div>
 
                 <div class="col-sm-8 text-right">
@@ -138,67 +121,111 @@
             </div>
         </div>
     </header>
-<!-- Danh sách truyện -->
 
-<section class="light_section gallery">
-        <div class="container-fluid">
+
+    <section id="breadcrumbs" class="light_section with_bottom_border">
+        <div class="container">
+
             <div class="row">
                 <div class="col-sm-12">
-                    <h2 class="section_header text-center">Our Projects</h2>
-                    <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit perspiciatis, cupiditate impedit autem dicta harum sint corporis nemo fugit consectetur optio similique ad quod, voluptas earum, omnis veniam amet incidunt!</p>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.php">Trang chủ</a>
+                        </li>
+                        <li>
+                            <a href="#">Truyện tranh</a>
+                        </li>
+                        <li class="active"><h1>Kimetsu no Yaiba</h1></li>
 
-                    <div id="isotope_container" class="isotope row">
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 webdesign photography">
-                            <div class="gallery-image">
-                                <img src="./img/anime/kimetsu-no-yaiba.jpg" alt="">
-                                <div class="gallery-image-links">
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="kimetsu-no-yaiba.php">Kimetsu No Yaiba</a></h3>
-                                <p>Tanjiro là con cả trong một gia đình không còn người cha. Một hôm, Tanjiro đi bán than ở một ngôi làng nọ và phải ở lại đó qua đêm vì có tin đồn rằng, về đêm, luôn có một con quỷ lởn vởn ở ngọn núi gần đó. Khi Tanjiro đi về nhà vào ngày hôm sau, bi kịch đang chờ đón cậu.</p>
+                    </ol>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="light_section gallery-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="section_header text-center">KITMETSU NO YAIBA</h2>
+                </div>
+                <div class="col-sm-7">
+                    <div id="carousel-generic" class="carousel slide">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="/img/anime/kimetsu-no-yaiba.jpg" alt="image">
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 photography webdesign">
+                <div class="col-sm-5 project-details" style="font-size: 16px;">
+                    <h4>Mô tả truyện</h4>
+                    <p class="description">
+                        Tanjiro là con cả trong một gia đình không còn người cha. Một hôm, Tanjiro đi bán than ở một ngôi làng nọ và phải ở lại đó qua đêm vì có tin đồn rằng, về đêm, luôn có một con quỷ lởn vởn ở ngọn núi gần đó. Khi Tanjiro đi về nhà vào ngày hôm sau, bi kịch đang chờ đón cậu. 
+                    </p>
+                    <p><span>Thể loại:</span> Hành động, Kinh dị</p>
+                    <p><span>Tác giả:</span> <a href="#">Hoàng Thái</a></p>
+                    <p><span>Nhóm dịch:</span> <a href="#">Hoàng Thái</a></p>
+                    <p><span>Tình trạng</span> Đang tiến hành</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--  List chương truyện-->
+    <section class="darkgrey_section">
+        <div class="container">
+            <div class="row">
+                <table class="table list-chapters" style="font-size: 20px">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col-sm-6">Tên chương</th>
+                            <th scope="col-sm-4">Ngày đăng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="#">Chapter 1: Cruelty</a></td>
+                            <td>30/06/2018</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Chapter 2: The Stranger</a></td>
+                            <td>30/06/2018</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="grey_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <h2 class="section_header text-center">Những truyện cùng nhóm dịch</h2>
+
+                    <div id="related-gallery-items-carousel" class="owl-carousel">
+
+                        <div class="gallery-item development">
                             <div class="gallery-image">
-                                <img src="img/anime/one piece.jpg" alt="">
+                                <img src="/img/anime/beastars.jpg" alt="">
                                 <div class="gallery-image-links">
                                 </div>
                             </div>
                             <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">One Piece</a></h3>
-                                <p>Monkey D. Luffy, 1 cậu bé rất thích hải tặc có ước mơ tìm được kho báu One Piece và trở thành Vua hải tặc - Pirate King.</p>
-                            </div>
-                        </div>
-
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 development">
-                            <div class="gallery-image">
-                                <img src="img/anime/beastars.jpg" alt="">
-                                <div class="gallery-image-links">
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">Beastars</a></h3>
-                                <p>Dd quod error est aliquam vel a ipsa, vitae, corrupti reiciendis voluptatem ducimus praesentium inventore?</p>
-                            </div>
-                        </div>
-
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 development">
-                            <div class="gallery-image">
-                                <img src="img/anime/boku-no-hero-academia.png" alt="">
-                                <div class="gallery-image-links">
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">Boku no Hero Academia</a></h3>
+                                <h3><a href="gallery-single.html">Lorem Ipsum Dolor</a></h3>
                                 <p>Dacere temporibus error consectetur ducimus odio, perferendis in quo vel odit praesentium officia iure nisi!</p>
                             </div>
                         </div>
 
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 webdesign">
+                        <div class="gallery-item webdesign">
                             <div class="gallery-image">
-                                <img src="example/gallery/05.jpg" alt="">
+                                <img src="/img/anime/one piece.jpg" alt="">
                                 <div class="gallery-image-links">
                                 </div>
                             </div>
@@ -208,9 +235,9 @@
                             </div>
                         </div>
 
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 photography">
+                        <div class="gallery-item photography">
                             <div class="gallery-image">
-                                <img src="example/gallery/06.jpg" alt="">
+                                <img src="/img/anime/boku-no-hero-academia.png" alt="">
                                 <div class="gallery-image-links">
                                 </div>
                             </div>
@@ -219,37 +246,13 @@
                                 <p>Dnemo praesentium modi quidem iusto, culpa consequuntur veniam, voluptate sunt est assumenda dolorem sint ex!</p>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 development programming">
-                            <div class="gallery-image">
-                                <img src="example/gallery/07.jpg" alt="">
-                                <div class="gallery-image-links">
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">Lorem Ipsum Dolor</a></h3>
-                                <p>Dnim pariatur sequi ex et velit eaque ducimus placeat eligendi. Facere animi quos explicabo totam veniam.</p>
-                            </div>
-                        </div>
-
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 programming">
-                            <div class="gallery-image">
-                                <img src="example/gallery/08.jpg" alt="">
-                                <div class="gallery-image-links">
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">Lorem Ipsum Dolor</a></h3>
-                                <p>Daut ab vitae doloribus voluptates necessitatibus beatae, quibusdam autem perferendis repellendus inventore earum quaerat accusamus.</p>
-                            </div>
-                        </div>
-                    </div>  
                 </div>
             </div>
         </div>
     </section>
-    
-</section>
+
 
     <footer id="footer" class="darkgrey_section">
         <div class="container">
@@ -297,7 +300,6 @@
         </div>
     </footer>
 
-
 </div><!-- eof #box_wrapper -->
 
 <div class="preloader">
@@ -314,30 +316,7 @@
         <script src="js/vendor/jquery.hoverIntent.js"></script>
         <script src="js/vendor/superfish.js"></script>
         
-        <!-- page scrolling -->
-        <script src="js/vendor/jquery.easing.1.3.js"></script>
-        <script src='js/vendor/jquery.nicescroll.min.js'></script>
-        <script src="js/vendor/jquery.ui.totop.js"></script>
-        <script src="js/vendor/jquery.localscroll-min.js"></script>
-        <script src="js/vendor/jquery.scrollTo-min.js"></script>
-        <script src='js/vendor/jquery.parallax-1.1.3.js'></script>
-
-        <!-- widgets -->
-        <script src="js/vendor/jquery.easypiechart.min.js"></script><!-- pie charts -->
-        <script src='js/vendor/jquery.countTo.js'></script><!-- digits counting -->
-        <script src="js/vendor/jquery.prettyPhoto.js"></script><!-- lightbox photos -->
-        <script src='js/vendor/jquery.plugin.min.js'></script><!-- plugin creator for comingsoon counter -->
-        <script src='js/vendor/jquery.countdown.js'></script><!-- coming soon counter -->        
-        <script src="js/vendor/jquery.elevateZoom-3.0.8.min.js"></script><!-- zoom images -->
-        <script src='js/vendor/jflickrfeed.min.js'></script><!-- flickr -->
-        <script src='twitter/jquery.tweet.min.js'></script><!-- twitter -->
-
-        <!-- sliders, filters, carousels -->
-        <script src="js/vendor/jquery.isotope.min.js"></script>
         <script src='js/vendor/owl.carousel.min.js'></script>
-        <script src='js/vendor/jquery.fractionslider.min.js'></script>
-        <script src='js/vendor/jquery.flexslider-min.js'></script>
-        <script src='js/vendor/jquery.bxslider.min.js'></script>
 
         <!-- custom scripts -->
         <script src="js/plugins.js"></script>
