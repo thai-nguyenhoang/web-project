@@ -119,14 +119,13 @@
                                                 <?php 
                                             }
                                         ?>
-                                    </li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="#"><i class="rt-icon-images2"></i>Danh sách truyện</a>
                             </li>
                             <li>
-                                <a href="contact.php"><i class="rt-icon-contacts"></i> Liên hệ</a>
+                                <a href="contact.html"><i class="rt-icon-contacts"></i> Liên hệ</a>
                             </li>
                         </ul>  
                     </nav>
@@ -148,7 +147,6 @@
                             include './truyen/listtruyen.php';
                         ?>
                     </div>
-                    </div>  
                 </div>
             </div>
         </div>

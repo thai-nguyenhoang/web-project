@@ -40,7 +40,9 @@ if (isset($_POST['reg_user'])) {
 
   $password=sha1($password_1);
 
+
   $dk= $pdh->query("INSERT INTO thanhvien (username, email, password) VALUES('$username', '$email', '$password')");  
+  
 } 
 
 //lỗi
