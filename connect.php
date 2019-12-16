@@ -1,20 +1,22 @@
 <?php
-session_start();
+if(!isset($_SESSION))
+{
+    session_start();
+}
 $username="";
 $email="";
 $errors=array();
 try{
-//$pdh = new PDO("mysql:host=localhost; dbname=id7397545_truyen"  , "id7397545_kfc300"  , "fantasy300"  );
+//$pdh = new PDO("mysql:host=localhost; dbname=id7396972_truyen"  , "id7396972_hoangthai"  , "hoangthai123"  );
 $pdh = new PDO("mysql:host=localhost; dbname=truyen"  , "root"  , ""  );
 $pdh->query("  set names 'utf8'"  );
-
 }
 catch(Exception $e){
     echo $e->getMessage(); exit;
 
 }
 
-$stm = $pdh->query("  SELECT * FROM user"  );
+$stm = $pdh->query("  SELECT * FROM thanhvien"  );
 
 
 //kiem tra tai khoan co ton tai hay chua
@@ -24,8 +26,8 @@ if (isset($_POST['reg_user'])) {
   $email = $_POST['email'];
   $password_1 = $_POST['password_1'];
   $password_2 = $_POST['password_2'];
-  $user_check_query =$pdh->query("SELECT username, email FROM user WHERE username='$username' OR email='$email' LIMIT 1");
-  $result = $user_check_query->fetchAll(PDO::FETCH_ASSOC);
+  /*$user_check_query =$pdh->query("SELECT username, email FROM user WHERE username='$username' OR email='$email' LIMIT 1");
+  $result = $user_check_query->fetchAll(PDO::FETCH_ASSOC);*/
 //nếu tài khoản tồn tại
 
 
@@ -37,19 +39,17 @@ if (isset($_POST['reg_user'])) {
   if ($password_1 != $password_2) { array_push($errors, "Two passwords do not match"); }   
 
   $password=sha1($password_1);
-  $dk= $pdh->query("INSERT INTO user (username, email, password) VALUES('$username', '$email', '$password')");  
 
-  
+  $dk= $pdh->query("INSERT INTO thanhvien (username, email, password) VALUES('$username', '$email', '$password')");  
 } 
 
 //lỗi
 //đăng nhập
 if (isset($_POST['log_user'])) {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-
-  if (empty($username)) {
-    array_push($errors, "Username is required");
+  $email = $_POST['email'];
+  $password = $_POST['password_1'];
+  if (empty($email)) {
+    array_push($errors, "Email is required");
   }
   if (empty($password)) {
     array_push($errors, "Password is required");
@@ -57,14 +57,12 @@ if (isset($_POST['log_user'])) {
 
   if (count($errors) == 0) {
     $password = sha1($password);
-    $results = $pdh->query("SELECT * FROM user WHERE username='$username' AND password='$password'");
+    $results = $pdh->query("SELECT * FROM thanhvien WHERE email='$email' AND password='$password'");
 
     if ($results->rowCount() == 1) {
-      $_SESSION['username'] = $username;
-      $_SESSION['success'] = "You are now logged in";
-      header('location: success.php');
+      $_SESSION['email'] = $email;
     }else {
-      array_push($errors, "Wrong username/password combination");
+      array_push($errors, "Wrong email/password combination");
     }
   }
 }

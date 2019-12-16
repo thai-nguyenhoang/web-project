@@ -9,47 +9,13 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css" id="color-switcher-link">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/fonts.css">
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 
 </head>
 <body>
-<!-- login modal -->
-
-<div class="modal fade login-modal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                 <h4 class="modal-title" id="loginModalLabel">MANGA<span class="highlight">ROCK</span> Đăng nhập</h4>
-            </div>
-            <form role="form" method="post" action="index.php">
-                <div class="modal-body">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Tên đăng nhập</label>
-                            <input type="text" size="20" class="" name="username" value="<?php echo $username; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Mật khẩu</label>
-                            <input type="password" name="password" >
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Ghi nhớ cho lần sau
-                            </label>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" name="log_user" class="theme_button"><i class="rt-icon-ok"></i> Đăng nhập</button>
-                    <a href="#" class="theme_button" data-dismiss="modal"><i class="rt-icon-times"></i> Cancel</a>
-                </div> 
-                <?php include("error.php"); ?>           
-            </form>
-        </div>
-    </div>
-</div>
-
 
 <div id="box_wrapper">
 
@@ -66,7 +32,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <span>
-                        <i class="rt-icon-user2"></i> <a href="#" data-toggle="modal" data-target=".login-modal">Đăng nhập</a>
+                        <i class="rt-icon-user2"></i> <a href="login.php" >Đăng nhập</a>
                     </span>
                     <span>
                         <i class="rt-icon-locked"></i> <a href="register.php">Đăng ký</a>
@@ -100,7 +66,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-4">
-                    <a href="./" class="navbar-brand">MANGA<span>Rock</span></a>
+                    <a href="index.php" class="navbar-brand">MANGA<span>Rock</span></a>
                 </div>
 
                 <div class="col-sm-8 text-right">
@@ -141,50 +107,29 @@
                                 <a href="index.php"><i class="rt-icon-home"></i>Trang chủ</a>
                             </li>
                             <li>
-                                <a href="#"><i class="rt-icon-book"></i>Cập nhật mới</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="rt-icon-images2"></i> Nổi bật</a>
-                            </li>
-                            <li>
-                                <a href="blog.html"><i class="rt-icon-book2"></i>Wiki</a>
+                                <a href="#"><i class="rt-icon-book"></i>Thể loại</a>
                                 <ul>
                                     <li>
-                                        <a href="blog.html"><i class="rt-icon-book2"></i>Thể loại</a>
-                                        <ul>
-                                            <li>
-                                                <a href="blog-right.html">Hành động</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-full.html">Phiêu lưu</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="blog-single.html"><i class="rt-icon-world"></i>Quốc gia</a>
-                                        <ul>
-                                            <li>
-                                                <a href="blog-single-right.html">Nhật</a>
-                                            </li>
-                                             <li>
-                                                <a href="blog-single-full.html">Trung</a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-single-full.html">Hàn</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="rt-icon-brush"></i>Tác giả</a>
+                                        <!-- Thể loại -->
+                                        <?php
+                                            $tl = $pdh->query("select * from theloai");
+                                            foreach($tl as $tl){
+                                                ?>
+                                                <a href="#"><?php echo $tl["theloai"]; ?></a>
+                                                <?php 
+                                            }
+                                        ?>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="contact.html"><i class="rt-icon-contacts"></i> Liên hệ</a>
+                                <a href="#"><i class="rt-icon-images2"></i>Danh sách truyện</a>
+                            </li>
+                            <li>
+                                <a href="contact.php"><i class="rt-icon-contacts"></i> Liên hệ</a>
                             </li>
                         </ul>  
                     </nav>
-                
                 </div>
             </div>
         </div>
@@ -195,121 +140,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <h2 class="section_header text-center">Our Projects</h2>
-                    <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit perspiciatis, cupiditate impedit autem dicta harum sint corporis nemo fugit consectetur optio similique ad quod, voluptas earum, omnis veniam amet incidunt!</p>
+                    <h2 class="section_header text-center"></h2>
 
                     <div id="isotope_container" class="isotope row">
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 webdesign photography">
-                            <div class="gallery-image">
-                                <img src="./img/anime/kimetsu-no-yaiba.jpg" alt="">
-                                <div class="gallery-image-links">
-                                    <a class="p-view prettyPhoto " title="" data-gal="prettyPhoto[gal]" href="example/gallery/01.jpg"></a>
-                                    <a class="p-link" title="" href="./gallery-single.html"></a>
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">Kimetsu No Yaiba</a></h3>
-                                <p>Tanjiro là con cả trong một gia đình không còn người cha. Một hôm, Tanjiro đi bán than ở một ngôi làng nọ và phải ở lại đó qua đêm vì có tin đồn rằng, về đêm, luôn có một con quỷ lởn vởn ở ngọn núi gần đó. Khi Tanjiro đi về nhà vào ngày hôm sau, bi kịch đang chờ đón cậu.</p>
-                            </div>
-                        </div>
-
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 photography webdesign">
-                            <div class="gallery-image">
-                                <img src="img/anime/one piece.jpg" alt="">
-                                <div class="gallery-image-links">
-                                    <a class="p-view prettyPhoto " title="" data-gal="prettyPhoto[gal]" href="example/gallery/02.jpg"></a>
-                                    <a class="p-link" title="" href="./gallery-single.html"></a>
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">One Piece</a></h3>
-                                <p>Monkey D. Luffy, 1 cậu bé rất thích hải tặc có ước mơ tìm được kho báu One Piece và trở thành Vua hải tặc - Pirate King.</p>
-                            </div>
-                        </div>
-
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 development">
-                            <div class="gallery-image">
-                                <img src="img/anime/beastars.jpg" alt="">
-                                <div class="gallery-image-links">
-                                    <a class="p-view prettyPhoto " title="" data-gal="prettyPhoto[gal]" href="example/gallery/03.jpg"></a>
-                                    <a class="p-link" title="" href="./gallery-single.html"></a>
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">Beastars</a></h3>
-                                <p>Dd quod error est aliquam vel a ipsa, vitae, corrupti reiciendis voluptatem ducimus praesentium inventore?</p>
-                            </div>
-                        </div>
-
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 development">
-                            <div class="gallery-image">
-                                <img src="img/anime/boku-no-hero-academia.png" alt="">
-                                <div class="gallery-image-links">
-                                    <a class="p-view prettyPhoto " title="" data-gal="prettyPhoto[gal]" href="example/gallery/04.jpg"></a>
-                                    <a class="p-link" title="" href="./gallery-single.html"></a>
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">Boku no Hero Academia</a></h3>
-                                <p>Dacere temporibus error consectetur ducimus odio, perferendis in quo vel odit praesentium officia iure nisi!</p>
-                            </div>
-                        </div>
-
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 webdesign">
-                            <div class="gallery-image">
-                                <img src="example/gallery/05.jpg" alt="">
-                                <div class="gallery-image-links">
-                                    <a class="p-view prettyPhoto " title="" data-gal="prettyPhoto[gal]" href="example/gallery/05.jpg"></a>
-                                    <a class="p-link" title="" href="./gallery-single.html"></a>
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">Lorem Ipsum Dolor</a></h3>
-                                <p>Dlaborum soluta dolores ipsum tempore eaque cumque pariatur corporis illo quia architecto nisi, magnam.</p>
-                            </div>
-                        </div>
-
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 photography">
-                            <div class="gallery-image">
-                                <img src="example/gallery/06.jpg" alt="">
-                                <div class="gallery-image-links">
-                                    <a class="p-view prettyPhoto " title="" data-gal="prettyPhoto[gal]" href="example/gallery/06.jpg"></a>
-                                    <a class="p-link" title="" href="./gallery-single.html"></a>
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">Lorem Ipsum Dolor</a></h3>
-                                <p>Dnemo praesentium modi quidem iusto, culpa consequuntur veniam, voluptate sunt est assumenda dolorem sint ex!</p>
-                            </div>
-                        </div>
-
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 development programming">
-                            <div class="gallery-image">
-                                <img src="example/gallery/07.jpg" alt="">
-                                <div class="gallery-image-links">
-                                    <a class="p-view prettyPhoto " title="" data-gal="prettyPhoto[gal]" href="example/gallery/07.jpg"></a>
-                                    <a class="p-link" title="" href="./gallery-single.html"></a>
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">Lorem Ipsum Dolor</a></h3>
-                                <p>Dnim pariatur sequi ex et velit eaque ducimus placeat eligendi. Facere animi quos explicabo totam veniam.</p>
-                            </div>
-                        </div>
-
-                        <div class="isotope-item gallery-item col-md-3 col-sm-6 programming">
-                            <div class="gallery-image">
-                                <img src="example/gallery/08.jpg" alt="">
-                                <div class="gallery-image-links">
-                                    <a class="p-view prettyPhoto " title="" data-gal="prettyPhoto[gal]" href="example/gallery/08.jpg"></a>
-                                    <a class="p-link" title="" href="./gallery-single.html"></a>
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="gallery-single.html">Lorem Ipsum Dolor</a></h3>
-                                <p>Daut ab vitae doloribus voluptates necessitatibus beatae, quibusdam autem perferendis repellendus inventore earum quaerat accusamus.</p>
-                            </div>
-                        </div>
+                        <!-- List truyện -->
+                        <?php
+                            include './truyen/listtruyen.php';
+                        ?>
+                    </div>
                     </div>  
                 </div>
             </div>
@@ -352,7 +190,7 @@
                             <a href="#" title="">Phiêu lưu</a>
                             <a href="#" title="">Chuyển sinh</a>
                             <a href="#" title="">Kinh dị</a>
-                            <a href="#" title="">Futanari</a>
+                            <a href="#" title="">Đời thường</a>
                         </div>
                     </div>
                 </div>

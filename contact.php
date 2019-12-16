@@ -33,7 +33,7 @@
                         <li>
                             <a href="index.html">Trang chủ</a>
                         </li>
-                        <li class="active"><h1>Đăng ký</h1></li>
+                        <li class="active"><h1>Liên hệ</h1></li>
                     </ol>
                 </div>
                 
@@ -41,66 +41,58 @@
         </div>
     </section>
 
-<section class="light_section">
+<section id="content" class="light_section">
     <div class="container">
+
         <div class="row">
-
-            <div class="col-sm-5 col-sm-push-1">
-                <form  class="form-horizontal" role="form" method="post" action="register.php">
-                    <div  class="form-group validate-required" id="username">
-                        <label for="username" class="col-sm-3 control-label">Name 
-                            <abbr class="required" title="required">*</abbr>
-                        </label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="username" value="<?php echo $username; ?>">
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                    <!-- Email -->
-                    <div class="form-group validate-required validate-email" id="email">
-                        <label for="email" class="col-sm-3 control-label">Email 
-                            <abbr class="required" title="required">*</abbr>
-                        </label>
-                        <div class="col-sm-9">
-                             <input type="email" class="form-control" name="email" value="<?php echo $email; ?>">
-                        </div>
-                    </div>
-                    <!-- Mật khẩu -->
-                    <div class="form-group validate-required validate-email" id="password_1">
-                        <label for="password_1" class="col-sm-3 control-label">Mật khẩu
-                            <abbr class="required" title="required">*</abbr>
-                        </label>
-                        <div class="col-sm-9">
-                             <input type="password" class="form-control" name="password_1">
-                        </div>
-                    </div>
-                    <div class="form-group validate-required validate-email" id="password_2">
-                        <label for="password_2" class="col-sm-3 control-label">Nhập lại mật khẩu 
-                            <abbr class="required" title="required">*</abbr>
-                        </label>
-                        <div class="col-sm-9">
-                             <input type="password" class="form-control" name="password_2">
-                        </div>
-                    </div>
-                     <?php include("error.php"); ?>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9" >
-                            <button type="submit" class="btn btn-block theme_button" name="reg_user"><i class="rt-icon-user2"></i> Đăng ký</button>
-                        </div>
-                    </div>
-                </form>
-
-
+            <div class="col-sm-12 text-center">
+                <h2 class="section_header">Hãy liên hệ với chúng tôi</h2>
             </div>
-            <div class="card">
-                <div class="col-sm-5 col-sm-push-2 text-center">
-                    <h3 >Bạn đã có tài khoản?</h3>
-                    <a class="btn btn-block theme_button" href="login.php" style="color:white">ĐĂNG NHẬP NGAY</a>
-                </div>
-             </div>   
         </div>
 
-       </div>
+        <div class="row">
+            
+
+            <div class="widget col-sm-6 to_animate">
+                <form class="contact-form" method="post" action="/">
+                    <p class="contact-form-name">
+                        <label for="name">Tên <span class="required">*</span></label>
+                        <input type="text" aria-required="true" size="30" value="" name="name" id="name" class="form-control" placeholder="Tên">
+                    </p>
+                    <p class="contact-form-email">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" aria-required="true" size="30" value="" name="email" id="email" class="form-control" placeholder="Email">
+                    </p>
+                    <p class="contact-form-message">
+                        <label for="message">Nội dung </label>
+                        <textarea aria-required="true" rows="8" cols="45" name="message" id="message" class="form-control" placeholder="Nội dung"></textarea>
+                    </p>
+                    <p class="contact-form-submit vertical-margin-40">
+                        <!-- <input type="submit" value="Send" id="contact_form_submit" name="contact_submit" class="theme_button"> -->
+                        <button type="submit" id="contact_form_submit" name="contact_submit" class="theme_button"><i class="rt-icon-sent"></i> Gửi !</button>
+                    </p>
+                </form>
+            </div>
+                    
+
+            <div class="widget widget_contact col-sm-6 to_animate">
+                <h3>Contact Info</h3>
+                <p>Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. In ac felis quis tortor malesuada pretium. In hac habitasse platea dictumst curabitur nisi hac habitasse platea dictumst maecenas nec odio et ante tincidunt tempus morbi ac felis.
+                <br><br>
+                    <i class="rt-icon-device-phone"></i><strong>Phone:</strong> +12 345 678 9123
+                </p>
+                <p>
+                    <i class="rt-icon-pencil"></i><strong>Email:</strong> <a href="mailto:info@company.com">info@company.com</a>
+                </p>
+                <p>
+                    <i class="rt-icon-globe-outline"></i><strong>Website: </strong><a href="./">www.hoangthai123.ga</a>
+                </p>
+                <p>
+                    <i class="rt-icon-location-arrow-outline"></i><strong>Address:</strong> 180 Cao Lỗ, Phương 4, Quận 8
+                </p>
+
+            </div>
+        </div>
     </div>
 </section>
 

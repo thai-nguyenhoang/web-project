@@ -33,7 +33,7 @@
                         <li>
                             <a href="index.html">Trang chủ</a>
                         </li>
-                        <li class="active"><h1>Đăng ký</h1></li>
+                        <li class="active"><h1>Đăng nhập</h1></li>
                     </ol>
                 </div>
                 
@@ -46,18 +46,9 @@
         <div class="row">
 
             <div class="col-sm-5 col-sm-push-1">
-                <form  class="form-horizontal" role="form" method="post" action="register.php">
-                    <div  class="form-group validate-required" id="username">
-                        <label for="username" class="col-sm-3 control-label">Name 
-                            <abbr class="required" title="required">*</abbr>
-                        </label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="username" value="<?php echo $username; ?>">
-                        </div>
-                    </div>
-                    <div class="clear"></div>
-                    <!-- Email -->
+                <form  class="form-horizontal" role="form" method="post" action="login.php">
                     <div class="form-group validate-required validate-email" id="email">
+                        <!-- Nhập email -->
                         <label for="email" class="col-sm-3 control-label">Email 
                             <abbr class="required" title="required">*</abbr>
                         </label>
@@ -65,7 +56,8 @@
                              <input type="email" class="form-control" name="email" value="<?php echo $email; ?>">
                         </div>
                     </div>
-                    <!-- Mật khẩu -->
+                    <div class="clear"></div>
+                    <!-- Nhập pass-->
                     <div class="form-group validate-required validate-email" id="password_1">
                         <label for="password_1" class="col-sm-3 control-label">Mật khẩu
                             <abbr class="required" title="required">*</abbr>
@@ -74,18 +66,15 @@
                              <input type="password" class="form-control" name="password_1">
                         </div>
                     </div>
-                    <div class="form-group validate-required validate-email" id="password_2">
-                        <label for="password_2" class="col-sm-3 control-label">Nhập lại mật khẩu 
-                            <abbr class="required" title="required">*</abbr>
-                        </label>
-                        <div class="col-sm-9">
-                             <input type="password" class="form-control" name="password_2">
+                    <div class="checkbox " style="padding: 0 0 20px 120px">
+                            <label>
+                                <input type="checkbox"> Ghi nhớ cho lần sau
+                            </label>
                         </div>
-                    </div>
                      <?php include("error.php"); ?>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9" >
-                            <button type="submit" class="btn btn-block theme_button" name="reg_user"><i class="rt-icon-user2"></i> Đăng ký</button>
+                            <button type="submit" class="btn btn-block theme_button" name="log_user"><i class="rt-icon-user2"></i> Đăng nhập</button>
                         </div>
                     </div>
                 </form>
@@ -94,8 +83,8 @@
             </div>
             <div class="card">
                 <div class="col-sm-5 col-sm-push-2 text-center">
-                    <h3 >Bạn đã có tài khoản?</h3>
-                    <a class="btn btn-block theme_button" href="login.php" style="color:white">ĐĂNG NHẬP NGAY</a>
+                    <h3 >Bạn chưa có tài khoản?</h3>
+                    <a class="btn btn-block theme_button" href="register.php" style="color:white">ĐĂNG KÝ NGAY</a>
                 </div>
              </div>   
         </div>

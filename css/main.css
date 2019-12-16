@@ -2656,6 +2656,8 @@ animated elements
     font-size: 13px;
     font-weight: 400;
     padding: 14px 20px;
+    min-width: 160px;
+
   }
 
   .sf-menu > li > a:hover,
@@ -5440,82 +5442,7 @@ isotope animations
   transition-duration: 0s;
 }
 
-/*switcher styles*/
-#switcher {
-  position: fixed;
-  padding: 0 10px 0 20px;
-  top: 30%;
-  left: -200px;
-  width: 200px;
-  height: 350px;
-  background-color: #ffffff;
-  z-index: 12500;
-  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  -webkit-transition: all 0.6s ease;
-  -moz-transition: all 0.6s ease;
-  -o-transition: all 0.6s ease;
-  -ms-transition: all 0.6s ease;
-  transition: all 0.6s ease;
+.grey_section .list-chapters{
+  margin: 3px 0 50px 0;
+  border: 2px solid #blue;
 }
-
-#switcher.active {
-  left: 0;
-}
-
-#switcher span {
-  -webkit-box-shadow: 3px 0 5px 0 rgba(0, 0, 0, 0.2);
-  box-shadow: 3px 0 5px 0 rgba(0, 0, 0, 0.2);
-  display: block;
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  color: #1D1D1D;
-  background-color: #ffffff;
-  text-align: center;
-  right: -50px;
-  top: 0;
-  cursor: pointer;
-}
-
-#switcher li {
-  margin-bottom: 10px;
-}
-
-#switcher p {
-  margin-top: -7px;
-}
-
-#switcher-version a {
-  padding: 6px 12px;
-  display: inline-block;
-  line-height: 1;
-}
-
-#switcher-version a.light, #switcher-version a.dark:hover {
-  background-color: #f1f1f1;
-  color: #1D1D1D;
-}
-
-#switcher-version a.dark, #switcher-version a.light:hover {
-  background-color: #343434;
-  color: #ffffff;
-}
-
-#switcher-colors a {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  background-color: #F2A258;
-}
-
-#switcher-colors a.color2 {
-  background-color: #5775BF;
-}
-
-#switcher-colors a.color3 {
-  background-color: #F27458;
-}
-
-/*# sourceMappingURL=main.css.map */
