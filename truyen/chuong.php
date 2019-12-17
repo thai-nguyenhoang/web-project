@@ -1,10 +1,19 @@
-<?php 
-session_start();
-include('../connect.php'); 
+<?php include('../connect.php'); 
 
-$truyen = $pdh->query("SELECT * FROM truyen");
+$chapID = (isset($_GET['chapID'])?$_GET['chapID']:'');
+$querychap  = "SELECT * FROM chuong where chapID = '$chapID' ";
+
+$comicID = (isset($_SESSION['comicID']) ? $_SESSION['comicID'] : '');
+$query = "SELECT * FROM truyen LEFT JOIN tacgia ON truyen.`authorID`=`tacgia`.`authorID` LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where comicID = '$comicID' ";
+if ($chap = $pdh->query($querychap)) {
+	while ($rowchap = $chap->fetch()) {
+		var_dump($rowchap);
+		$arr[]= explode(" ", $rowchap["url"]);
+var_dump($arr);
+		$folder="../img";
 
 ?>
+
 <!DOCTYPE html>
 <head>
     <title>Title</title>
@@ -130,13 +139,13 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                         </li>
                         <li class="active">
                             <?php 
-                                $comicID = (isset($_GET['comicID']) ? $_GET['comicID'] : '');
-                                $_SESSION['comicID'] = $comicID;
-                                $query = "SELECT * FROM truyen LEFT JOIN tacgia ON truyen.`authorID`=`tacgia`.`authorID` LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where comicID = '$comicID' ";
+                                
 
                                 if($result = $pdh->query($query)){
                                     while($row = $result->fetch(PDO::FETCH_ASSOC)){
-                                         $authorid=$row["authorID"];
+                                 $tentruyen = $row["tentruyen"];
+                                 $sochuong = $rowchap["sochuong"];
+
  
                             ?>
                             <h1><?php echo $row["tentruyen"]; ?></h1>
@@ -148,10 +157,7 @@ $truyen = $pdh->query("SELECT * FROM truyen");
             </div>
         </div>
     </section>
-
-
-
-    <section class="light_section gallery-single">
+     <section class="light_section gallery-single">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -163,103 +169,37 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img src="<?php echo $row["cover"]; ?>" alt="image">
+ <!--     xuất từng trang ảnh của chương -->                           
+                            	<?php 
+								foreach ($arr as $value) {
+									foreach ($value as $value1) {
+										$img = $value1;
+										var_dump($img);
+										$img_path = $folder."/".$tentruyen."/".$sochuong."/".$img;
+									}
+									?>
+								<img src="<?php $img_path; ?>" alt="image">
+								<?php  } ?>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-5 project-details" style="font-size: 16px;">
-                    <h4>Mô tả truyện</h4>
-                    <p class="description">
-                        <?php echo $row["mota"]; ?>
-                    </p>
-                    <p><span>Thể loại:</span> Hành động</p>
-                    <p><span>Tác giả:</span> <a href="#"><?php echo $row["tacgia"]; ?></a></p>
-                    <p><span>Nhóm dịch:</span> <a href="#"><?php echo $row["tennhom"]; ?></a></p>
-                    <p><span>Tình trạng</span> Đang tiến hành</p>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--  List chương truyện-->
-    <section class="darkgrey_section">
-        <div class="container">
-            <div class="row">
-                <table class="table list-chapters" style="font-size: 20px">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col-sm-6">Tên chương</th>
-                            <th scope="col-sm-4">Ngày đăng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <?php 
-                            $get_chapid = ("SELECT * FROM `chuong` where comicID='$comicID'");
-                            if($result_chapid = $pdh->query($get_chapid)){
-                                    while($chap = $result_chapid->fetch(PDO::FETCH_ASSOC)){
-                                         
-
-                             ?>
-                            <td><a href="chuong?chapID=<?php echo $chap["chapID"]; ?>"> 
-                                <?php if(!is_null($chap["tenchuong"])){
-                                echo $chap["tenchuong"];
-                            }else {
-                                echo $chap["sochuong"];
-                            } 
-                                    
-                            ?> 
-                        </a></td>
-                            <td><?php echo $chap["ngaydang"]; ?></td>
-                        </tr>
-                        <?php 
-                        }
-                        }
-                         ?>
-                        
-                    </tbody>
-                </table>
+                
             </div>
         </div>
     </section>
 
-    <section class="grey_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
 
-                    <h2 class="section_header text-center">Những truyện cùng nhóm dịch</h2>
 
-                    <div id="related-gallery-items-carousel" class="owl-carousel">
-                    <?php 
-                        $listTruyen = $pdh->query("SELECT * FROM truyen LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where authorID = '$authorid' ");
-                        foreach($listTruyen as $listTruyen){
-                    ?>
-                        <div class="gallery-item">
-                            <div class="gallery-image">
-                                <img src="<?php echo $listTruyen["cover"]; ?>" alt="">
-                                <div class="gallery-image-links">
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="./detail-truyen?comicID=<?php echo $listTruyen["comicID"]; ?>.php"><?php echo $listTruyen["tentruyen"] ?></a></h3>
-                                <p><?php echo $listTruyen["mota"] ?></p>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                        ?>
-<?php    
+<!-- đóng if và while của truyện và chương -->
+    <?php 
+ }
+ }
 }
-} ?>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
+}	
+     ?>
     </section>
 
 

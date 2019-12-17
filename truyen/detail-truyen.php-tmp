@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-include('../connect.php'); 
+include ('../connect.php');
 
 $truyen = $pdh->query("SELECT * FROM truyen");
 
@@ -37,8 +37,8 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                         <i class="fa fa-phone"></i> +1 (900) 12345-123
                     </span>
                 </div>
-                
-                
+
+
             </div>
         </div>
     </section>
@@ -56,9 +56,9 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                     <a class="socialico-facebook" href="#" title="Facebook" data-toggle="tooltip">#</a>
                     <a class="socialico-twitter" href="#" title="Twitter" data-toggle="tooltip">#</a>
                     <a class="socialico-google" href="#" title="Google" data-toggle="tooltip">#</a>
-                    
 
-                   
+
+
                         <div class="widget widget_search">
                             <form role="search" method="post" id="searchform" class="searchform form-inline" action="/">
                                 <div class="form-group">
@@ -71,9 +71,9 @@ $truyen = $pdh->query("SELECT * FROM truyen");
 
                 </div>
 
-                
-                
-                
+
+
+
             </div>
         </div>
     </section>
@@ -92,15 +92,15 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                                 <a href="#"><i class="rt-icon-book"></i>Thể loại</a>
                                 <ul class="list-inline">
                                     <!-- Thể loại -->
-                                    <?php
-                                        $tl = $pdh->query("select * from theloai");
-                                        foreach($tl as $tl){
-                                            ?>
-                                            <a href="#"><?php echo $tl["theloai"]; ?></a>
-                                            <?php 
-                                        }
-                                    ?>
-                                </ul>
+<?php
+$tl = $pdh->query("select * from theloai");
+foreach ($tl as $tl) {
+	?>
+	                                            <a href="#"><?php echo $tl["theloai"];?></a>
+	<?php
+}
+?>
+</ul>
                             </li>
                             <li>
                                 <a href="#"><i class="rt-icon-images2"></i>Danh sách truyện</a>
@@ -108,9 +108,9 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                             <li>
                                 <a href="contact.html"><i class="rt-icon-contacts"></i> Liên hệ</a>
                             </li>
-                        </ul>  
+                        </ul>
                     </nav>
-                
+
                 </div>
             </div>
         </div>
@@ -129,131 +129,129 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                             <a href="#">Truyện tranh</a>
                         </li>
                         <li class="active">
-                            <?php 
-                                $comicID = (isset($_GET['comicID']) ? $_GET['comicID'] : '');
-                                $_SESSION['comicID'] = $comicID;
-                                $query = "SELECT * FROM truyen LEFT JOIN tacgia ON truyen.`authorID`=`tacgia`.`authorID` LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where comicID = '$comicID' ";
+<?php
+$comicID             = (isset($_GET['comicID'])?$_GET['comicID']:'');
+$_SESSION['comicID'] = $comicID;
+$query               = "SELECT * FROM truyen LEFT JOIN tacgia ON truyen.`authorID`=`tacgia`.`authorID` LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where comicID = '$comicID' ";
 
-                                if($result = $pdh->query($query)){
-                                    while($row = $result->fetch(PDO::FETCH_ASSOC)){
-                                         $authorid=$row["authorID"];
- 
-                            ?>
-                            <h1><?php echo $row["tentruyen"]; ?></h1>
-                        </li>
+if ($result = $pdh->query($query)) {
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$authorid = $row["authorID"];
 
-                    </ol>
-                </div>
-                
-            </div>
-        </div>
-    </section>
+		?>
+		                            <h1><?php echo $row["tentruyen"];?></h1>
+		                        </li>
+
+		                    </ol>
+		                </div>
+
+		            </div>
+		        </div>
+		    </section>
 
 
 
-    <section class="light_section gallery-single">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
+		    <section class="light_section gallery-single">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col-sm-12">
 
-                    <h2 class="section_header text-center"><?php echo $row["tentruyen"]; ?></h2>
-                </div>
-                <div class="col-sm-7">
-                    <div id="carousel-generic" class="carousel slide">
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img src="<?php echo $row["cover"]; ?>" alt="image">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+		                    <h2 class="section_header text-center"><?php echo $row["tentruyen"];?></h2>
+		                </div>
+		                <div class="col-sm-7">
+		                    <div id="carousel-generic" class="carousel slide">
+		                        <!-- Wrapper for slides -->
+		                        <div class="carousel-inner">
+		                            <div class="item active">
+		                                <img src="<?php echo $row["cover"];?>" alt="image">
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
 
-                <div class="col-sm-5 project-details" style="font-size: 16px;">
-                    <h4>Mô tả truyện</h4>
-                    <p class="description">
-                        <?php echo $row["mota"]; ?>
-                    </p>
-                    <p><span>Thể loại:</span> Hành động</p>
-                    <p><span>Tác giả:</span> <a href="#"><?php echo $row["tacgia"]; ?></a></p>
-                    <p><span>Nhóm dịch:</span> <a href="#"><?php echo $row["tennhom"]; ?></a></p>
-                    <p><span>Tình trạng</span> Đang tiến hành</p>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--  List chương truyện-->
-    <section class="darkgrey_section">
-        <div class="container">
-            <div class="row">
-                <table class="table list-chapters" style="font-size: 20px">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col-sm-6">Tên chương</th>
-                            <th scope="col-sm-4">Ngày đăng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <?php 
-                            $get_chapid = ("SELECT * FROM `chuong` where comicID='$comicID'");
-                            if($result_chapid = $pdh->query($get_chapid)){
-                                    while($chap = $result_chapid->fetch(PDO::FETCH_ASSOC)){
-                                         
+		                <div class="col-sm-5 project-details" style="font-size: 16px;">
+		                    <h4>Mô tả truyện</h4>
+		                    <p class="description">
+		<?php echo $row["mota"];?>
+		                    </p>
+		                    <p><span>Thể loại:</span> Hành động</p>
+		                    <p><span>Tác giả:</span> <a href="#"><?php echo $row["tacgia"];?></a></p>
+		                    <p><span>Nhóm dịch:</span> <a href="#"><?php echo $row["tennhom"];?></a></p>
+		                    <p><span>Tình trạng</span> Đang tiến hành</p>
 
-                             ?>
-                            <td><a href="chuong?chapID=<?php echo $chap["chapID"]; ?>"> 
-                                <?php if(!is_null($chap["tenchuong"])){
-                                echo $chap["tenchuong"];
-                            }else {
-                                echo $chap["sochuong"];
-                            } 
-                                    
-                            ?> 
-                        </a></td>
-                            <td><?php echo $chap["ngaydang"]; ?></td>
-                        </tr>
-                        <?php 
-                        }
-                        }
-                         ?>
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+		                </div>
+		            </div>
+		        </div>
+		    </section>
+		    <!--  List chương truyện-->
+		    <section class="darkgrey_section">
+		        <div class="container">
+		            <div class="row">
+		                <table class="table list-chapters" style="font-size: 20px">
+		                    <thead class="thead-dark">
+		                        <tr>
+		                            <th scope="col-sm-6">Tên chương</th>
+		                            <th scope="col-sm-4">Ngày đăng</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                        <tr>
+		<?php
+		$get_chapid = ("SELECT * FROM `chuong` where comicID='$comicID'");
+		if ($result_chapid = $pdh->query($get_chapid)) {
+			while ($chap = $result_chapid->fetch(PDO::FETCH_ASSOC)) {
 
-    <section class="grey_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
+				?>
+				                            <td><a href="chuong?chapID=<?php echo $chap["chapID"];?>">
+				<?php if (!is_null($chap["tenchuong"])) {
+					echo $chap["tenchuong"];
+				} else {
+					echo $chap["sochuong"];
+				}
 
-                    <h2 class="section_header text-center">Những truyện cùng nhóm dịch</h2>
+				?>
+				                        </a></td>
+				                            <td><?php echo $chap["ngaydang"];?></td>
+				                        </tr>
+				<?php
+			}
+		}
+		?>
+		</tbody>
+		                </table>
+		            </div>
+		        </div>
+		    </section>
 
-                    <div id="related-gallery-items-carousel" class="owl-carousel">
-                    <?php 
-                        $listTruyen = $pdh->query("SELECT * FROM truyen LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where authorID = '$authorid' ");
-                        foreach($listTruyen as $listTruyen){
-                    ?>
-                        <div class="gallery-item">
-                            <div class="gallery-image">
-                                <img src="<?php echo $listTruyen["cover"]; ?>" alt="">
-                                <div class="gallery-image-links">
-                                </div>
-                            </div>
-                            <div class="gallery-item-description">
-                                <h3><a href="./detail-truyen?comicID=<?php echo $listTruyen["comicID"]; ?>.php"><?php echo $listTruyen["tentruyen"] ?></a></h3>
-                                <p><?php echo $listTruyen["mota"] ?></p>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                        ?>
-<?php    
-}
-} ?>
+		    <section class="grey_section">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col-sm-12">
+
+		                    <h2 class="section_header text-center">Những truyện cùng nhóm dịch</h2>
+
+		                    <div id="related-gallery-items-carousel" class="owl-carousel">
+		<?php
+		$listTruyen = $pdh->query("SELECT * FROM truyen LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where authorID = '$authorid' ");
+		foreach ($listTruyen as $listTruyen) {
+			?>
+			                        <div class="gallery-item">
+			                            <div class="gallery-image">
+			                                <img src="<?php echo $listTruyen["cover"];?>" alt="">
+			                                <div class="gallery-image-links">
+			                                </div>
+			                            </div>
+			                            <div class="gallery-item-description">
+			                                <h3><a href="./detail-truyen?comicID=<?php echo $listTruyen["comicID"];?>.php"><?php echo $listTruyen["tentruyen"]?></a></h3>
+			                                <p><?php echo $listTruyen["mota"]?></p>
+			                            </div>
+			                        </div>
+			<?php
+		}
+		?>
+		<?php
+	}
+}?>
                     </div>
 
                 </div>
@@ -287,8 +285,8 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                         </div>
                     </div>
                 </div>
-                    
-                    
+
+
                 <div class="col-md-6 col-sm-8 to_animate">
                     <div class="widget widget_tag_cloud">
                         <h3 class="widget-title">Thể loại</h3>
@@ -301,10 +299,10 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                         </div>
                     </div>
                 </div>
-                    
-                    
-                
-            
+
+
+
+
             </div>
         </div>
     </footer>
@@ -324,7 +322,7 @@ $truyen = $pdh->query("SELECT * FROM truyen");
         <!-- superfish menu  -->
         <script src="../js/vendor/jquery.hoverIntent.js"></script>
         <script src="../js/vendor/superfish.js"></script>
-        
+
         <script src='../js/vendor/owl.carousel.min.js'></script>
 
         <!-- custom scripts -->

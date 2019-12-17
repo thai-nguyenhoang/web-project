@@ -6,7 +6,7 @@ foreach($listTruyen as $listTruyen){
     ?>
     <div class="isotope-item gallery-item col-md-3 col-sm-6">
     <div class="gallery-image">
-        <img src="./img/anime/<?php echo $listTruyen["cover"]; ?>" alt="">
+        <img src="<?php echo $listTruyen["cover"]; ?>" alt="">
         <div class="gallery-image-links">
         </div>
     </div>

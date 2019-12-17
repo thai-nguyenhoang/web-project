@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th12 17, 2019 lúc 02:40 PM
+-- Thời gian đã tạo: Th12 17, 2019 lúc 06:17 PM
 -- Phiên bản máy phục vụ: 5.7.26
 -- Phiên bản PHP: 7.3.5
 
@@ -52,22 +52,25 @@ DROP TABLE IF EXISTS `chuong`;
 CREATE TABLE IF NOT EXISTS `chuong` (
   `chapID` int(11) NOT NULL AUTO_INCREMENT,
   `comicID` int(11) NOT NULL,
-  `sochuong` varchar(100) NOT NULL,
+  `sochuong` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `tenchuong` varchar(100) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `ngaydang` date NOT NULL,
-  `url` varchar(1000) NOT NULL,
+  `url` varchar(1000) CHARACTER SET latin1 NOT NULL,
   PRIMARY KEY (`chapID`,`comicID`) USING BTREE,
   KEY `comicID` (`comicID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Đang đổ dữ liệu cho bảng `chuong`
 --
 
-INSERT INTO `chuong` (`chapID`, `comicID`, `sochuong`, `ngaydang`, `url`) VALUES
-(1, 5, 'a', '2019-12-17', '1.png 2.png'),
-(2, 11, '1', '2019-12-17', '0.jpg 1.jpg 2.jpg.png 3.jpg.png 4.jpg.png 5.jpg.png'),
-(3, 11, '1', '2019-12-17', '0.jpg 1.jpg 2.png 3.png 4.png 5.png'),
-(4, 11, '1', '2019-12-17', '0.jpg 1.jpg 2.png 3.png 4.png 5.png');
+INSERT INTO `chuong` (`chapID`, `comicID`, `sochuong`, `tenchuong`, `ngaydang`, `url`) VALUES
+(1, 5, 'a', NULL, '2019-12-17', '1.png 2.png'),
+(2, 11, '1', 'khởi đầu', '2019-12-17', '0.jpg 1.jpg 2.png 3.png 4.png 5.png'),
+(3, 11, '2', 'rời đảo', '2019-12-17', '0.jpg 1.jpg 2.png 3.png 4.png 5.png'),
+(4, 11, '3', 'du hành', '2019-12-17', '0.jpg 1.jpg 2.png 3.png 4.png 5.png'),
+(5, 11, '3', 'đảo cam', '2019-12-18', '0.jpg 1.jpg 2.png 3.png 4.png 5.png'),
+(6, 11, '4', 'đảo cam', '2019-12-18', '0.jpg 1.jpg 2.png 3.png 4.png 5.png');
 
 -- --------------------------------------------------------
 
