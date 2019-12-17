@@ -136,9 +136,11 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                         <li class="active">
                             <?php 
                                 $comicID = (isset($_GET['comicID']) ? $_GET['comicID'] : '');
-                                $query = "SELECT * FROM truyen where comicID = '$comicID' ";
+                                $query = "SELECT * FROM truyen LEFT JOIN tacgia ON truyen.`authorID`=`tacgia`.`authorID` LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where comicID = '$comicID' ";
+
                                 if($result = $pdh->query($query)){
                                     while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                                         $authorid=$row["authorID"];
 
                             ?>
                             <h1><?php echo $row["tentruyen"]; ?></h1>
@@ -165,7 +167,7 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img src="/img/anime/<?php echo $row["hinh"]; ?>" alt="image">
+                                <img src="<?php echo $row["cover"]; ?>" alt="image">
                             </div>
                         </div>
                     </div>
@@ -177,8 +179,8 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                         <?php echo $row["mota"]; ?>
                     </p>
                     <p><span>Thể loại:</span> Hành động</p>
-                    <p><span>Tác giả:</span> <a href="#"><?php echo $row["authorID"]; ?></a></p>
-                    <p><span>Nhóm dịch:</span> <a href="#"><?php echo $row["teamID"]; ?></a></p>
+                    <p><span>Tác giả:</span> <a href="#"><?php echo $row["tacgia"]; ?></a></p>
+                    <p><span>Nhóm dịch:</span> <a href="#"><?php echo $row["tennhom"]; ?></a></p>
                     <p><span>Tình trạng</span> Đang tiến hành</p>
                 </div>
             </div>
@@ -219,7 +221,7 @@ $truyen = $pdh->query("SELECT * FROM truyen");
 
                     <div id="related-gallery-items-carousel" class="owl-carousel">
                     <?php 
-                        $listTruyen = $pdh->query("SELECT * FROM truyen");
+                        $listTruyen = $pdh->query("SELECT * FROM truyen LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where authorID = '$authorid' ");
                         foreach($listTruyen as $listTruyen){
                     ?>
                         <div class="gallery-item">

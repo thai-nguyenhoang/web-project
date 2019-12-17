@@ -1,4 +1,29 @@
-<?php include('connect.php') ?>
+<?php include('connect.php') 
+if (isset($_POST['reg_user'])) {
+//nhan gia tri tu form
+  $username =  $_POST['username'];
+  $email = $_POST['email'];
+  $password_1 = $_POST['password_1'];
+  $password_2 = $_POST['password_2'];
+  /*$user_check_query =$pdh->query("SELECT username, email FROM user WHERE username='$username' OR email='$email' LIMIT 1");
+  $result = $user_check_query->fetchAll(PDO::FETCH_ASSOC);*/
+//nếu tài khoản tồn tại
+
+
+//kiem tra ton tai, neu ko, xuat day thong bao
+
+  if (empty($username)) { array_push($errors, "Username is required"); }
+  if (empty($email)) { array_push($errors, "Email is required"); }
+  if (empty($password_1)||empty($password_2)) { array_push($errors, "Password is required"); }
+  if ($password_1 != $password_2) { array_push($errors, "Two passwords do not match"); }   
+
+  $password=sha1($password_1);
+
+
+  $dk= $pdh->query("INSERT INTO thanhvien (username, email, password) VALUES('$username', '$email', '$password')");  
+  
+} 
+?>
 <!DOCTYPE html>
 <html class="no-js">
 <head>
@@ -52,7 +77,7 @@
                             <abbr class="required" title="required">*</abbr>
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="username" value="<?php echo $username; ?>">
+                            <input type="text" class="form-control" name="username" value="<?php echo $username; ?>" pattern="[a-zA-Z0-9]{6,}" title="Các ký tự được phép: a-z, A-Z, số 0-9, ít nhất 6 kí tự.">
                         </div>
                     </div>
                     <div class="clear"></div>
@@ -62,7 +87,7 @@
                             <abbr class="required" title="required">*</abbr>
                         </label>
                         <div class="col-sm-9">
-                             <input type="email" class="form-control" name="email" value="<?php echo $email; ?>">
+                              <input type="email" class="form-control" name="email" value="<?php echo $email; ?>" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+(\.[a-zA-Z.]{2,10}){1,2}" title="Định dạng email sai!">
                         </div>
                     </div>
                     <!-- Mật khẩu -->
@@ -71,7 +96,7 @@
                             <abbr class="required" title="required">*</abbr>
                         </label>
                         <div class="col-sm-9">
-                             <input type="password" class="form-control" name="password_1">
+                             <input type="password" class="form-control" name="password_1" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}" title="Mật khẩu phải có ít nhất 1 kí tự thường, 1 kí tự hoa, độ dài ít nhất 8 kí tự">
                         </div>
                     </div>
                     <div class="form-group validate-required validate-email" id="password_2">

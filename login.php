@@ -1,4 +1,28 @@
-<?php include('connect.php') ?>
+<?php include('connect.php') 
+//đăng nhập
+if (isset($_POST['log_user'])) {
+  $email = $_POST['email'];
+  $password = $_POST['password_1'];
+  if (empty($email)) {
+    array_push($errors, "Email is required");
+  }
+  if (empty($password)) {
+    array_push($errors, "Password is required");
+  }
+
+  if (count($errors) == 0) {
+    $password = sha1($password);
+    $results = $pdh->query("SELECT * FROM thanhvien WHERE email='$email' AND password='$password'");
+
+    if ($results->rowCount() == 1) {
+      $_SESSION['email'] = $email;
+    }else {
+      array_push($errors, "Wrong email/password combination");
+    }
+  }
+}
+
+?>
 <!DOCTYPE html>
 <html class="no-js">
 <head>
