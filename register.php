@@ -1,10 +1,17 @@
-<?php include('connect.php') 
+<?php
+include('connect.php'); 
+$username="";
+$email="";
+//$check = $pdh->query("SELECT * FROM thanhvien");
+//$checka = $check->fetchAll(PDO::FETCH_ASSOC);
+
 if (isset($_POST['reg_user'])) {
 //nhan gia tri tu form
   $username =  $_POST['username'];
   $email = $_POST['email'];
   $password_1 = $_POST['password_1'];
   $password_2 = $_POST['password_2'];
+
   /*$user_check_query =$pdh->query("SELECT username, email FROM user WHERE username='$username' OR email='$email' LIMIT 1");
   $result = $user_check_query->fetchAll(PDO::FETCH_ASSOC);*/
 //nếu tài khoản tồn tại
@@ -18,11 +25,9 @@ if (isset($_POST['reg_user'])) {
   if ($password_1 != $password_2) { array_push($errors, "Two passwords do not match"); }   
 
   $password=sha1($password_1);
-
-
-  $dk= $pdh->query("INSERT INTO thanhvien (username, email, password) VALUES('$username', '$email', '$password')");  
-  
-} 
+  $dk= $pdh->query("INSERT INTO thanhvien (username, email, pass, avatar) VALUES('$username', '$email', '$password','guest.png')");
+  var_dump($dk);
+  } 
 ?>
 <!DOCTYPE html>
 <html class="no-js">

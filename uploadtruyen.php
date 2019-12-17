@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("connect.php");
 $sql = $pdh->query( "SELECT * FROM `chuong`");
 $sqls = $sql->fetchALL(PDO::FETCH_ASSOC);

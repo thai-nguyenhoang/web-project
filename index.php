@@ -1,4 +1,8 @@
-<?php include('connect.php') ?>
+<?php include('connect.php');
+session_start();
+if(isset($_SESSION["email"]))
+        $email = $_SESSION["email"];
+?>
 <!DOCTYPE html>
 <head>
     <title>Title</title>
@@ -30,14 +34,7 @@
                         <i class="fa fa-phone"></i> +1 (900) 12345-123
                     </span>
                 </div>
-                <div class="col-sm-6 text-right">
-                    <span>
-                        <i class="rt-icon-user2"></i> <a href="login.php" >Đăng nhập</a>
-                    </span>
-                    <span>
-                        <i class="rt-icon-locked"></i> <a href="register.php">Đăng ký</a>
-                    </span>
-                </div>
+                <?php include 'topbar.php'; ?>
                 
             </div>
         </div>

@@ -1,4 +1,7 @@
-<?php include('connect.php') 
+<?php include('connect.php'); 
+session_start();
+$username="";
+$email="";
 //đăng nhập
 if (isset($_POST['log_user'])) {
   $email = $_POST['email'];
@@ -12,10 +15,12 @@ if (isset($_POST['log_user'])) {
 
   if (count($errors) == 0) {
     $password = sha1($password);
-    $results = $pdh->query("SELECT * FROM thanhvien WHERE email='$email' AND password='$password'");
-
+    $results = $pdh->query("SELECT * FROM thanhvien WHERE email='$email' AND pass='$password'");
     if ($results->rowCount() == 1) {
-      $_SESSION['email'] = $email;
+        $row = $results->fetch();
+        $_SESSION['email'] = $row['email'];
+        $_SESSION["my_user"] = $row["username"];
+      header('location: index.php');
     }else {
       array_push($errors, "Wrong email/password combination");
     }
