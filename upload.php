@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("connect.php");
 
 
@@ -12,18 +13,23 @@ if (isset($_POST["submit"])) {
  
     $FOLDER = "img/";
     $comicname = $_POST['comicname'];
-
     $chapter = $_POST['chapter'];
+    $chaptername = $_POST['chaptername'];
     $date = $_POST['date'];
 
     $myfile = $_FILES["U_FILES"];
-    var_dump($myfile);
+//    var_dump($myfile);
     $get_comicid= $pdh->query("SELECT comicID FROM `truyen` where tentruyen = '$comicname'");
+    if ($get_comicid->rowCount()==0) {
+        echo 'không tồn tại truyện này';
+    }else {
+        
+   
     $result_comic=$get_comicid->fetch(PDO::FETCH_ASSOC);
     foreach ($result_comic as $value) {
                     $comicid=$value;
                 }
-    var_dump($comicid);
+//    var_dump($comicid);
     if (!is_dir($FOLDER.$comicname))
             {
                 mkdir($FOLDER.$comicname.'/');
@@ -43,7 +49,7 @@ if (isset($_POST["submit"])) {
               
                 $file_name =  $myfile["name"][$i];
                 $url[]= $myfile["name"][$i];
-             var_dump($file_name);  
+//             var_dump($file_name);  
             move_uploaded_file($myfile["tmp_name"][$i], $img_path . $file_name);
 
              
@@ -51,10 +57,19 @@ if (isset($_POST["submit"])) {
         }
     }
     $str = implode(" ", $url);
-    $sql_up_file = $pdh->query("INSERT INTO `chuong`(`comicID`, `sochuong`, `ngaydang`, `url`) VALUES ('$comicid','$chapter','$date','$str')");
+    $sql_check = $pdh->query("SELECT sochuong FROM `chuong` where sochuong = '$chapter'");
+    if ($sql_check->rowCount()>0) {
+        echo 'số chương bị trùng';
+    }else {
+        
     
-    var_dump($sql_up_file);
-    echo json_encode($response);
+
+        
+    $sql_up_file = $pdh->query("INSERT INTO `chuong`(`comicID`, `sochuong`,`tenchuong`, `ngaydang`, `url`) VALUES ('$comicid','$chapter','$chaptername','$date','$str')");
+    
+//    var_dump($sql_up_file);
+    }
+ }
 }
 ?>
 <!DOCTYPE html>
@@ -62,11 +77,12 @@ if (isset($_POST["submit"])) {
     <body>
         <form name="form" action="upload.php" method="POST" enctype="multipart/form-data">
 
-            <input type="text" name="comicname">
+            tên truyện<input type="text" name="comicname">
             
-            <input type="text" name="chapter">
-            <input type="date" name="date">
-            <input type="file" name="U_FILES[]" multiple="" >
+            số chương<input type="text" name="chapter">
+            tên chương<input type="text" name="chaptername">
+            ngày đăng<input type="date" name="date">
+            up ảnh<input type="file" name="U_FILES[]" multiple="" >
             <input type="submit" name="submit" value="Submit">
         </form>
     </body>

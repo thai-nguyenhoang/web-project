@@ -3002,7 +3002,7 @@ animated elements
   }
 }
 @media (max-width: 767px) {
-  .author-meta .col-sm-10 {
+  .author-meta .carousel-generic-10 {
     padding: 0 30px 15px;
     text-align: center;
   }
@@ -3923,6 +3923,9 @@ widget_pages
 }
 .owl-carousel .owl-item {
   float: left;
+}
+.owl-carousel .owl-item1 {
+  float: center;
 }
 .owl-carousel .owl-wrapper,
 .owl-carousel .owl-item {
@@ -4876,6 +4879,7 @@ a.pp_arrow_previous, a.pp_arrow_next {
   position: relative;
 }
 
+
 .pp_gallery ul {
   float: left;
   height: 35px;
@@ -5441,3 +5445,5 @@ isotope animations
   -o-transition-duration: 0s;
   transition-duration: 0s;
 }
+
+
