@@ -1,15 +1,14 @@
 <?php include('../connect.php'); 
-
+session_start();
 $chapID = (isset($_GET['chapID'])?$_GET['chapID']:'');
 $querychap  = "SELECT * FROM chuong where chapID = '$chapID' ";
 
-$comicID = (isset($_SESSION['comicID']) ? $_SESSION['comicID'] : '');
-$query = "SELECT * FROM truyen LEFT JOIN tacgia ON truyen.`authorID`=`tacgia`.`authorID` LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where comicID = '$comicID' ";
+
 if ($chap = $pdh->query($querychap)) {
 	while ($rowchap = $chap->fetch()) {
-		var_dump($rowchap);
+		
 		$arr[]= explode(" ", $rowchap["url"]);
-var_dump($arr);
+
 		$folder="../img";
 
 ?>
@@ -139,7 +138,8 @@ var_dump($arr);
                         </li>
                         <li class="active">
                             <?php 
-                                
+                                $comicID = (isset($_SESSION['comicID']) ? $_SESSION['comicID'] : '');
+								$query = "SELECT * FROM truyen LEFT JOIN tacgia ON truyen.`authorID`=`tacgia`.`authorID` LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where comicID = '$comicID' ";
 
                                 if($result = $pdh->query($query)){
                                     while($row = $result->fetch(PDO::FETCH_ASSOC)){
@@ -150,7 +150,9 @@ var_dump($arr);
                             ?>
                             <h1><?php echo $row["tentruyen"]; ?></h1>
                         </li>
-
+						<li>
+							<h1><?php echo $rowchap["sochuong"]; ?></h1>
+						</li>
                     </ol>
                 </div>
                 
@@ -170,17 +172,15 @@ var_dump($arr);
                         <div class="carousel-inner">
                             <div class="item active">
  <!--     xuất từng trang ảnh của chương -->                           
-                            	<?php 
-								foreach ($arr as $value) {
-									foreach ($value as $value1) {
-										$img = $value1;
-										var_dump($img);
-										$img_path = $folder."/".$tentruyen."/".$sochuong."/".$img;
-									}
-									?>
-								<img src="<?php $img_path; ?>" alt="image">
-								<?php  } ?>
-                                
+                            <?php 
+							foreach ($arr as $value) {
+								foreach ($value as $value1) {
+									$img = $value1;
+									$img_path = $folder."/".$tentruyen."/".$sochuong."/".$img;
+								?>
+							<img src="<?php echo $img_path; ?>"  alt="image">
+							<?php  } } ?>
+                                <!-- <img src="<?php echo $row["cover"]; ?>" alt="image"> -->
                             </div>
                         </div>
                     </div>

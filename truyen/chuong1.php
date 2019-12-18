@@ -200,7 +200,7 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                             $get_chapid = ("SELECT * FROM `chuong` where comicID='$comicID'");
                             if($result_chapid = $pdh->query($get_chapid)){
                                     while($chap = $result_chapid->fetch(PDO::FETCH_ASSOC)){
-                                       
+                                         
 
                              ?>
                             <td><a href="chuong?chapID=<?php echo $chap["chapID"]; ?>"> 
