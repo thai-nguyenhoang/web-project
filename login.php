@@ -16,7 +16,7 @@ if (isset($_POST['log_user'])) {
   if (count($errors) == 0) {
     $password = sha1($password);
     $results = $pdh->query("SELECT * FROM thanhvien WHERE email='$email' AND pass='$password'");
- 
+
     if ($results->rowCount() == 1) {
         $row = $results->fetch();
         $_SESSION['email'] = $row['email'];
