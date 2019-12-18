@@ -1,5 +1,10 @@
 <?php
+session_start();
 include("connect.php");
+error_reporting(E_ERROR | E_PARSE);
+$loi=array();
+$loi["truyen"] = $loi["tacgia"] = $loi["nhom"] = Null;
+$tg = $nhom = Null;
 $sql = $pdh->query( "SELECT * FROM `chuong`");
 $sqls = $sql->fetchALL(PDO::FETCH_ASSOC);
 
@@ -16,7 +21,6 @@ if (isset($_POST["submit"])) {
     $cv = $_POST['cover'];
 
 
-
 $get_comic= $pdh->query("SELECT tentruyen FROM `truyen` where tentruyen = '$comicname'");
 
     $result_comic = $get_comic->fetchAll(PDO::FETCH_ASSOC); 
@@ -24,39 +28,51 @@ $get_comic= $pdh->query("SELECT tentruyen FROM `truyen` where tentruyen = '$comi
 
 
 $get_tacgia= $pdh->query("SELECT authorID FROM `tacgia` where tacgia = '$tg'");
-    $result_tg = $get_tacgia->fetch(PDO::FETCH_ASSOC); 
-var_dump($result_tg);
-foreach ($result_tg as  $value) {
-    $idtacgia = $value;
-}
+    $result_tg = $get_tacgia->fetch(); 
+
 
 $get_nhomdich= $pdh->query("SELECT teamID FROM `nhom` where tennhom = '$nhom'");
-    $result_nhom = $get_nhomdich->fetch(PDO::FETCH_ASSOC);
-foreach ($result_nhom as $key => $value) {
-    $idnhom = $value;
-}
+    $result_nhom = $get_nhomdich->fetch();
+
+
 if ($get_comic->rowCount()>0) {
-    echo 'truyen bị trùng';  
+    $loi["truyen"] ="truyện bị trùng.<br\>";  
 }
 if(!$result_tg){
-    echo 'thêm the gia moi';
+    $loi["tacgia"] = "thêm tác giả mới.<br\>";
     $them_tg= $pdh->query("INSERT INTO `tacgia` (`tacgia`) VALUES ('$tg' )");
-}if(!$result_tg){
-    echo 'khong co nhom dich nay';
+    $get_them_tg = $pdh->query("SELECT authorID FROM `tacgia` where tacgia = '$tg'");
+    $result_them_tg = $get_them_tg->fetch();
+    foreach ($result_them_tg as  $value) {
+    $idtacgia = $value;
+    }
 }
-if ($get_comic->rowCount()==0) {
     
+foreach ($result_tg as  $value) {
+$idtacgia = $value;
+}
+
+   // header('location: uploadtruyen.php');
+
+while (!$result_nhom) {
+    $loi["nhom"] = "Nhóm ko tồn tại.<br\>";
+    break;
+}
+foreach ($result_nhom as $value) {
+$idnhom = $value;
+}   
+
+if ($get_comic->rowCount()==0  && empty($loi)) {
+
+
     $themtruyen = $pdh->prepare("INSERT INTO `truyen` (`tentruyen`, `mota`, `trangthai`, `luotxem`, `countryID`,`authorID`,`teamID`, `cover`) VALUES ('$comicname', '$mt', '$tt', '0', '$qg','$idtacgia', '$idnhom', '$cv')");
     $themtruyen->execute();
     
-    var_dump($themtruyen);
     
     $get_comicid = $pdh->query("SELECT comicID FROM `truyen` where tentruyen = '$comicname'");
     $resurt_comicid=$get_comicid->fetch(PDO::FETCH_ASSOC); 
-    var_dump($resurt_comicid);
     foreach ($resurt_comicid as $value) {
         $idcomic = $value;
-    var_dump($idcomic);
     }
     
     foreach ($tl as $value) {
@@ -94,7 +110,7 @@ if ($get_comic->rowCount()==0) {
                 
             </fieldset>
             
-            nhomdich<input type="text" name="nhomdich">
+            nhomdich<input type="text" name="nhomdich" >
             trangthai<select name="trangthai">
               <option value=1>dang tien hanh</option>
               <option value=2>hoan thanh</option>
@@ -104,5 +120,8 @@ if ($get_comic->rowCount()==0) {
             url anh<input type="text" name="cover">
             <input type="submit" name="submit" value="Submit">
         </form>
+        <?php foreach ($loi as $value) {
+            echo $value;
+        } ?>
     </body>
 </html>
