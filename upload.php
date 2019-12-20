@@ -1,5 +1,8 @@
 <?php
-session_start();
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include("connect.php");
 
 
@@ -57,7 +60,7 @@ if (isset($_POST["submit"])) {
         }
     }
     $str = implode(" ", $url);
-    $sql_check = $pdh->query("SELECT sochuong FROM `chuong` where sochuong = '$chapter'");
+    $sql_check = $pdh->query("SELECT sochuong FROM `chuong` where sochuong = '$chapter' AND comicID = '$comicid' ");
     if ($sql_check->rowCount()>0) {
         echo 'số chương bị trùng';
     }else {
@@ -75,16 +78,41 @@ if (isset($_POST["submit"])) {
 <!DOCTYPE html>
 <html>
     <body>
-        <form name="form" action="upload.php" method="POST" enctype="multipart/form-data">
-
-            tên truyện<input type="text" name="comicname">
-            
-            số chương<input type="text" name="chapter">
-            tên chương<input type="text" name="chaptername">
-            ngày đăng<input type="date" name="date">
-            up ảnh<input type="file" name="U_FILES[]" multiple="" >
-            <input type="submit" name="submit" value="Submit">
-        </form>
+        <div class="light_section">
+            <div class="container">
+                <h2 class="text-center">Đăng chương</h2>
+                <hr class="my-4">
+                <table class="table-responsive col-md-12 col-push-1" style="font-size: 20px">
+                    <tbody>
+                        <form name="form" action="upload.php" method="POST" enctype="multipart/form-data">
+                            <tr>
+                                <td class="col-sm-4">Nhập tên truyện: </td>
+                                <td class="col-sm-8"><input type="text" name="comicname"> </td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-4">Nhập số chương: </td>
+                                <td class="col-sm-8"><input type="text" name="chapter"> </td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-4">Nhập tên chương: </td>
+                                <td class="col-sm-8"><input type="text" name="chaptername">  </td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-4">Ngày đăng: </td>
+                                <td class="col-sm-8"><input type="date" name="date"> </td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-4">Chọn ảnh: </td>
+                                <td class="col-sm-8"><input type="file" name="U_FILES[]" multiple="" ></td>
+                            </tr>
+                            <tr>
+                                <input type="submit" name="submit" value="Submit">
+                            </tr>
+                        </form>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </body>
 
 

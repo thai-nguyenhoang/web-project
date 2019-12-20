@@ -1,9 +1,12 @@
 <?php
-session_start();
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include("connect.php");
 error_reporting(E_ERROR | E_PARSE);
 $loi=array();
-$loi["truyen"] = $loi["tacgia"] = $loi["nhom"] = Null;
+
 $tg = $nhom = Null;
 $sql = $pdh->query( "SELECT * FROM `chuong`");
 $sqls = $sql->fetchALL(PDO::FETCH_ASSOC);
@@ -51,9 +54,9 @@ if(!$result_tg){
 foreach ($result_tg as  $value) {
 $idtacgia = $value;
 }
-
+//var_dump($idtacgia);
    // header('location: uploadtruyen.php');
-
+//var_dump($result_nhom);
 while (!$result_nhom) {
     $loi["nhom"] = "Nhóm ko tồn tại.<br\>";
     break;
@@ -61,13 +64,20 @@ while (!$result_nhom) {
 foreach ($result_nhom as $value) {
 $idnhom = $value;
 }   
+//var_dump($idnhom);
+//var_dump($loi);
+foreach ($loi as $value) {
+$l = is_string($value);
+//var_dump($l);     
+}
+$s = empty($loi);
+//var_dump($s);
+if ($get_comic->rowCount()==0 && $s==true ) {
 
-if ($get_comic->rowCount()==0  && empty($loi)) {
-
-
+    
     $themtruyen = $pdh->prepare("INSERT INTO `truyen` (`tentruyen`, `mota`, `trangthai`, `luotxem`, `countryID`,`authorID`,`teamID`, `cover`) VALUES ('$comicname', '$mt', '$tt', '0', '$qg','$idtacgia', '$idnhom', '$cv')");
     $themtruyen->execute();
-    
+    //var_dump($themtruyen);
     
     $get_comicid = $pdh->query("SELECT comicID FROM `truyen` where tentruyen = '$comicname'");
     $resurt_comicid=$get_comicid->fetch(PDO::FETCH_ASSOC); 
@@ -80,6 +90,8 @@ if ($get_comic->rowCount()==0  && empty($loi)) {
         $themtheloaitruyen = $pdh->query("INSERT INTO `theloai_truyen` (`tagID`, `comicID`) VALUES ('$tagid', '$idcomic')");
      
     }
+    header('location: index.php');
+    echo "<script type='text/javascript'>alert('Thêm truyện thành công');</script>";
 }
 
 
@@ -93,31 +105,31 @@ if ($get_comic->rowCount()==0  && empty($loi)) {
 <html>
     <body>
         <form name="form" action="uploadtruyen.php" method="POST" enctype="multipart/form-data">
-            ten<input type="text" name="comicname">
-            tacgia<input type="text" name="tacgia">
+            Nhập tên: <input type="text" name="comicname">
+            Tác giả: <input type="text" name="tacgia">
             <fieldset>  
-                <legend>the loai</legend>  <br>
+                <legend>Thể loại</legend>
                     <input type="checkbox" name="theloai[]" value="1">Hành động<br>  
-                    <input type="checkbox" name="theloai[]" value="2">phiêu lưu<br>  
-                    <input type="checkbox" name="theloai[]" value="3">tình cảm<br>  
-                             
+                    <input type="checkbox" name="theloai[]" value="2">Phiêu lưu<br>  
+                    <input type="checkbox" name="theloai[]" value="3">Tình cảm<br>       
             </fieldset>
+            <br>
             <fieldset>
-                <legend>quoc gia</legend> <br>
+                <legend>Quốc gia</legend>
                     <input type="radio" name="quocgia" value="1" >Trung<br>
                     <input type="radio" name="quocgia" value="2">Nhật<br>
                     <input type="radio" name="quocgia" value="3">Hàn<br>
                 
             </fieldset>
             
-            nhomdich<input type="text" name="nhomdich" >
-            trangthai<select name="trangthai">
-              <option value=1>dang tien hanh</option>
-              <option value=2>hoan thanh</option>
-              <option value=3>tam ngung</option>
+            Nhóm dịch: <input type="text" name="nhomdich" >
+            Trạng thái: <select name="trangthai">
+              <option value=1>Đang tiến hành</option>
+              <option value=2>Hoàn thành</option>
+              <option value=3>Tạm ngưng</option>
             </select>
-            mota<textarea name="mota"></textarea>
-            url anh<input type="text" name="cover">
+            Mô tả: <textarea name="mota"></textarea>
+            url ảnh: <input type="text" name="cover">
             <input type="submit" name="submit" value="Submit">
         </form>
         <?php foreach ($loi as $value) {

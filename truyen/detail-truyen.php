@@ -137,6 +137,7 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                                 if($result = $pdh->query($query)){
                                     while($row = $result->fetch(PDO::FETCH_ASSOC)){
                                          $authorid=$row["authorID"];
+                                         $teamid = $row["teamID"];
  
                             ?>
                             <h1><?php echo $row["tentruyen"]; ?></h1>
@@ -163,7 +164,7 @@ $truyen = $pdh->query("SELECT * FROM truyen");
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img src="<?php echo $row["cover"]; ?>" alt="image">
+                                <img src="/img/anime/<?php echo $row["cover"]; ?>" alt="image">
                             </div>
                         </div>
                     </div>
@@ -234,26 +235,24 @@ $truyen = $pdh->query("SELECT * FROM truyen");
 
                     <div id="related-gallery-items-carousel" class="owl-carousel">
                     <?php 
-                        $listTruyen = $pdh->query("SELECT * FROM truyen LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where authorID = '$authorid' ");
+                        $listTruyen = $pdh->query("SELECT * FROM truyen LEFT JOIN nhom ON truyen.`teamID`=`nhom`.`teamID` where truyen.`teamID` = '$teamid' ");
                         foreach($listTruyen as $listTruyen){
                     ?>
                         <div class="gallery-item">
                             <div class="gallery-image">
-                                <img src="<?php echo $listTruyen["cover"]; ?>" alt="">
+                                <img src="/img/anime/<?php echo $listTruyen["cover"]; ?>" alt="" width="1140" height="300">
                                 <div class="gallery-image-links">
                                 </div>
                             </div>
                             <div class="gallery-item-description">
-                                <h3><a href="./detail-truyen?comicID=<?php echo $listTruyen["comicID"]; ?>.php"><?php echo $listTruyen["tentruyen"] ?></a></h3>
+                                <h3><a href="/truyen/detail-truyen?comicID=<?php echo $listTruyen["comicID"]; ?>.php"><?php echo $listTruyen["tentruyen"] ?></a></h3>
                                 <p><?php echo $listTruyen["mota"] ?></p>
                             </div>
                         </div>
                         <?php
+                    } 
                     }
-                        ?>
-<?php    
-}
-} ?>
+                    } ?>
                     </div>
 
                 </div>

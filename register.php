@@ -23,7 +23,7 @@ if (isset($_POST['reg_user'])) {
   if (empty($email)) { array_push($errors, "Email is required"); }
   if (empty($password_1)||empty($password_2)) { array_push($errors, "Password is required"); }
   if ($password_1 != $password_2) { array_push($errors, "Two passwords do not match"); }   
-
+  if($email == $email){ array_push($errors, "Tên đã có người dùng"); }
   $password=sha1($password_1);
   $dk= $pdh->query("INSERT INTO thanhvien (username, email, pass, avatar) VALUES('$username', '$email', '$password','guest.png')");
 

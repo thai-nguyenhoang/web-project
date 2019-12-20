@@ -24,6 +24,5 @@ if(isset($_SESSION["email"]))
         </div>
     </section>
     
-</section>
 
 <?php include 'duoi.php'; ?>
